@@ -1,115 +1,127 @@
 package com.ics.culminatinggame;
 
-//import java.util.Iterator;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-//import com.badlogic.gdx.Screen;
-//import com.badlogic.gdx.audio.Music;
-//import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
-//import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-//import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
-//import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-//import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
-public class Player extends ApplicationAdapter {
 
+
+public class Player extends InputAdapter implements Screen {
+
+    private Stage stage;
     private Texture playerImageNormal;
-    private Texture playerImageDamage;
+
+    private Texture background;
+
     private SpriteBatch batch;
-    private OrthographicCamera playerGameView;
-    private Rectangle playerShape;
 
-   // @Override
-    public void createPlayer() {
+    private float playerMovementY = 270;
 
-        playerImageNormal = new Texture(Gdx.files.internal("Player normal 64ver.png"));
-        playerImageDamage = new Texture(Gdx.files.internal("Player damage 64ver.png"));
+    private float playerMovementX = 0;
 
+    private OrthographicCamera playerView;
 
-        playerGameView = new OrthographicCamera();
-        playerGameView.setToOrtho(false, 800, 800);
+    @Override
+    public void show() {
+
+        playerImageNormal = new Texture("Player normal 32ver.png");
+        background = new Texture("ICS CULMINATING TILEMAP LEVEL 1 (PNG BIG).png");
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
         batch = new SpriteBatch();
-
-        playerShape = new Rectangle();
-        playerShape.x = ((800 / 2) - (64 / 2));
-        playerShape.y = 20; // <<FOR NOW>>
-        playerShape.width = 64;
-        playerShape.height = 64;
+        playerView = new OrthographicCamera();
+        playerView.setToOrtho(false, 1024, 1024);
 
     }
 
-  //  @Override
-    public void renderPlayerMovement() {
+    @Override
+    public void render(float delta) {
 
+        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
-        playerGameView.update();
-
-        batch.setProjectionMatrix(playerGameView.combined);
+        playerView.update();
 
         batch.begin();
-        batch.draw(playerImageNormal, playerShape.x, playerShape.y);
+        stage.draw();
+        batch.draw (background, 0, 0);
+        batch.draw (playerImageNormal, playerMovementX, playerMovementY);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+
+            playerMovementY += 300 * Gdx.graphics.getDeltaTime();
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+
+            playerMovementY -= 300 * Gdx.graphics.getDeltaTime();
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+
+            playerMovementX -= 300 * Gdx.graphics.getDeltaTime();
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+
+            playerMovementX += 300 * Gdx.graphics.getDeltaTime();
+        }
+
+        if (playerMovementX < 0) {
+
+            playerMovementX = 0;
+        }
+
+        if (playerMovementX > 1024 - 32) {
+
+            playerMovementX = 1024 - 32;
+        }
+
+        if (playerMovementY < 0) {
+
+            playerMovementY = 0;
+        }
+
+        if (playerMovementY > 1024 - 32) {
+
+            playerMovementY = 1024 - 32;
+        }
+
+        System.out.println ("DEBUG:\n-------------\nCoordinates\nX: " + playerMovementX + "\nY: " + playerMovementY);
+
         batch.end();
-
-        if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            playerGameView.unproject(touchPos);
-            playerShape.x = touchPos.x - 64 / 2;
-        }
-
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-
-            playerShape.x -= 200 * Gdx.graphics.getDeltaTime();
-        }
-        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-
-            playerShape.x += 200 * Gdx.graphics.getDeltaTime();
-        }
-        if (Gdx.input.isKeyPressed(Keys.UP)) {
-
-            playerShape.y -= 200 * Gdx.graphics.getDeltaTime();
-        }
-        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-
-            playerShape.y += 200 * Gdx.graphics.getDeltaTime();
-        }
-
-        if (playerShape.x < 0) {
-
-            playerShape.x = 0;
-        }
-
-        if (playerShape.x > 800 - 64) {
-
-            playerShape.x = 800 - 64;
-        }
-
-        if (playerShape.y < 0) {
-
-            playerShape.y = 0;
-        }
-
-        if (playerShape.y > 800 - 64) {
-
-            playerShape.y = 800 - 64;
-        }
     }
 
-    //@Override
-    public void objectDeletion() {
+    @Override
+    public void resize(int width, int height) {
 
-        playerImageDamage.dispose();
+    }
+
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void dispose() {
+
         playerImageNormal.dispose();
-        batch.dispose();
+        background.dispose();
     }
 
 }

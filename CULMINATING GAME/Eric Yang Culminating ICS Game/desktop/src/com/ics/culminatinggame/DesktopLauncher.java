@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.useVsync(true);
-		config.setWindowedMode(800, 800);
+		config.setWindowedMode(1024, 1024);
 		config.setForegroundFPS(60);
 		config.setTitle("CulminatingGameIcs");
 		new Lwjgl3Application(new IcsGame(), config);
