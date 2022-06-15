@@ -26,8 +26,6 @@ public class Block {
 
   //  private int[] arrayY;
 
-    public int tileLocationReader() {
-
-        
-    }
+    //public int tileLocationReader() {
+   //}
 }
