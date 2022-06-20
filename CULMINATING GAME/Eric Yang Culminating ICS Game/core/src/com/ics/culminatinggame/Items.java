@@ -12,7 +12,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Items { //extends InputAdapter implements Screen {
+public class Items {
 
 /**
     private Texture keyImage;

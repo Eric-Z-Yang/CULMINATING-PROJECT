@@ -96,6 +96,8 @@ public class Player extends InputAdapter implements Screen {
             batch.draw(keyImage, 70, 137);
         }
 
+        door.doorImageOpen.draw(batch);
+
         batch.end(); //REMOVE LATER FOR TEST
 
         if (blockRectangle.overlaps(playerRectangle)) {
@@ -105,28 +107,28 @@ public class Player extends InputAdapter implements Screen {
             playerMovementY = previousY;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
 
             previousY = playerMovementY;
-            playerMovementY += 300 * Gdx.graphics.getDeltaTime();
+            playerMovementY += 500 * Gdx.graphics.getDeltaTime();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 
             previousY = playerMovementY;
-            playerMovementY -= 300 * Gdx.graphics.getDeltaTime();
+            playerMovementY -= 500 * Gdx.graphics.getDeltaTime();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 
             previousX = playerMovementX;
-            playerMovementX -= 300 * Gdx.graphics.getDeltaTime();
+            playerMovementX -= 500 * Gdx.graphics.getDeltaTime();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 
             previousX = playerMovementX;
-            playerMovementX += 300 * Gdx.graphics.getDeltaTime();
+            playerMovementX += 500 * Gdx.graphics.getDeltaTime();
         }
 
         if (playerMovementX < 0) {
@@ -160,17 +162,16 @@ public class Player extends InputAdapter implements Screen {
         }
 
         Iterator<Rectangle> iter = keys.iterator();
-//        while(iter.hasNext()) {
+        while(iter.hasNext()) {
 //
-//            Rectangle keyRectangle = iter.next();
+            Rectangle keyRectangle = iter.next();
             if (playerRectangle.overlaps(keyRectangle)) {
-
                 System.out.println ("Debugging: Item has been gotten\n-----------------\n-------------------\n---------------\n------------------");
                 hasItem = true;
                 iter.remove();
             }
 //
-//        }
+        }
 
         playerRectangle = new Rectangle(playerMovementX, playerMovementY, playerImageNormal.getWidth(), playerImageNormal.getHeight());
         blockRectangle = new Rectangle(500, 500, blockImage.getWidth(), blockImage.getHeight()); // <<CHANGE X and Y later for the block placing array);
