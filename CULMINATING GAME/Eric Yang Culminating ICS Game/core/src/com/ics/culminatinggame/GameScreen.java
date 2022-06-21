@@ -19,7 +19,7 @@ public class GameScreen {
 
 
 
-
+/**
     public class Player extends InputAdapter implements Screen {
 
         private Stage stage;
@@ -210,4 +210,6 @@ public class GameScreen {
 
         }
     }
+
+*/
 }
