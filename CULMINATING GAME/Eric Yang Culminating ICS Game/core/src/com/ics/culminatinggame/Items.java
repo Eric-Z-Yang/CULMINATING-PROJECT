@@ -7,58 +7,28 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Items {
+import java.util.Iterator;
 
-/**
-    private Texture keyImage;
+public class Items extends GameObject{
 
-    private Rectangle KeyRectangle;
+    private int itemX;
+    private int itemY;
 
-    private SpriteBatch batch;
+    private Array<Rectangle> keys;
 
-    private Stage stage;
+    public Items (Texture objectTexture, Rectangle objectHitBox, int itemX, int itemY) {
 
-    @Override
-    public void show() {
+        super (objectTexture, objectHitBox);
 
-        keyImage = new Texture("Key 40x20ver.png");
-        stage = new Stage();
-        batch = new SpriteBatch();
-        Gdx.input.setInputProcessor(stage);
-        KeyRectangle = new Rectangle(70, 137, keyImage.getWidth(), keyImage.getHeight());
-
+        this.itemX = itemX;
+        this.itemY = itemY;
     }
 
-    @Override
-    public void render(float delta) {
-
-    }
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void dispose() {
-    }
-
-*/
 
 }

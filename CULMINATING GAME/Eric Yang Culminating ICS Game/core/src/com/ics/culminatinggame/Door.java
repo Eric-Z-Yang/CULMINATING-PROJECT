@@ -10,19 +10,26 @@ import com.badlogic.gdx.utils.Array;
 
 public class Door extends GameObject{
 
+//    private boolean doorStatus;
+
     public Door (Texture objectTexture, Rectangle objectHitBox) {
         super (objectTexture, objectHitBox);
 
-        doorImageOpen = new Texture("Door Open 64ver.png");
-        doorImageClose = new Texture("Door Closed 64ver.png");
 
-        doorRectangleOpen = new Rectangle(1, 1, doorRectangleOpen.getWidth(), doorImageOpen.getHeight());
-        doorRectangleClose = new Rectangle(1, 1, doorRectangleClose.getWidth(), doorImageClose.getHeight());
     }
 
-    //public void () {
+    public void doorOpenOrClose (boolean OpenOrClose) {
+
+        if (OpenOrClose = true) {
 
 
 
-   // }
+        }
+
+        else {
+
+            // do nothing
+
+        }
+    }
 }

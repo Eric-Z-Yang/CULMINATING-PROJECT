@@ -19,36 +19,33 @@ public class GameObject {
 
     private Rectangle objectHitBox;
 
-    private int objectMovementX;
+    public GameObject () {
 
-    private int objectMovementY;
+    }
 
     public GameObject (Texture objectTexture, Rectangle objectHitBox) {
 
         this.objectTexture = objectTexture;
         this.objectHitBox = objectHitBox;
-        this.objectMovementX = objectMovementX;
-        this.objectMovementY = objectMovementY;
-
     }
 
     public Texture getObjectTexture() {
 
-        return this.objectTexture;
+        return objectTexture;
     }
 
     public Rectangle getObjectHitBox() {
 
-        return this.objectHitBox;
+        return objectHitBox;
     }
 
-    public int getObjectMovementX() {
+    public void setObjectTexture(Texture newObjectTexture) {
 
-        return this.objectMovementX;
+        this.objectTexture = newObjectTexture;
     }
 
-    public int getObjectMovementY() {
+    public void setObjectHitBox(Rectangle newObjectHitBox) {
 
-        return this.objectMovementY;
+        this.objectHitBox = newObjectHitBox;
     }
 }
